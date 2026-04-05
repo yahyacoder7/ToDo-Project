@@ -1,0 +1,5 @@
+/node_modules
+.env
+prisma.config.ts
+/generated/prisma
+Learn-prisma
