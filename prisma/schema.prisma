@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  todos Todo[]
+}
+
+model Todo {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  date        DateTime
+  userid Int
+  user User @relation(fields: [userid], references: [id], onDelete: Cascade)
+}
