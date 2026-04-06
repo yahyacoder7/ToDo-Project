@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -19,8 +19,19 @@ model User {
 model Todo {
   id          Int      @id @default(autoincrement())
   title       String
-  description String
-  date        DateTime
-  userid Int
-  user User @relation(fields: [userid], references: [id], onDelete: Cascade)
+  description String?
+  dueDate        DateTime?
+  priority Priority @default(Low)
+  completed Boolean @default(false)
+  userId Int
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([userId])
+}
+enum Priority {
+  Low
+  Meduim
+  High
 }
